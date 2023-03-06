@@ -4,43 +4,41 @@ import 'dart:io';
 import 'package:tflite/tflite.dart';
 
 class AppController extends GetxController {
-  //RxString output = "".obs;
   RxList output = [].obs; //result after predict
   CameraController? cameraController; //controller for camera
   File? image; //for captured image
   RxString path = "".obs; //
-  List<CameraDescription>? cameras;
+
+  late List<CameraDescription> _cameras;
+  late CameraController _cameraController;
+  final RxBool _isInitialized = RxBool(false);
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    //loadCamera();
+    initCamera();
   }
 
-  // void loadCamera() async {
-  //   try {
-  //     cameras = await availableCameras();
-  //     if (cameras != null) {
-  //       cameraController = CameraController(cameras![1], ResolutionPreset.max);
-  //       print("camera load success");
-  //       //cameras[0] = first camera, change to 1 to another camera
-  //       //print("controller is null ${cameraController == null}");
-  //       //cameraController!.setFlashMode(FlashMode.off);
-
-  //       // cameraController!.initialize().then((_) {
-  //       //   if (!mounted) {
-  //       //     return;
-  //       //   }
-  //       //   setState(() {});
-  //       // });
-  //     } else {
-  //       print("NO any camera found");
-  //     }
-  //   } catch (e) {
-  //     print("error occurred: $e");
-  //   }
-  // }
+  Future<void> initCamera() async {
+    _cameras = await availableCameras();
+    _cameraController = CameraController(_cameras[1], ResolutionPreset.high);
+    _cameraController.initialize().then((value) {
+      _isInitialized.value = true;
+      _isInitialized.refresh();
+    }).catchError((Object e) {
+      if (e is CameraException) {
+        switch (e.code) {
+          case 'CameraAccessDenied':
+            print('User denied camera access.');
+            break;
+          default:
+            print('Handle other errors.');
+            break;
+        }
+      }
+    });
+  }
 
   //detect type of trash
   void detectImage() async {
