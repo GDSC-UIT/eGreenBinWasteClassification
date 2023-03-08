@@ -1,17 +1,22 @@
+import 'package:esp_app/data/data.dart';
 import 'package:get/get.dart';
 import 'package:camera/camera.dart';
 import 'dart:io';
 import 'package:tflite/tflite.dart';
 
 class AppController extends GetxController {
-  RxList output = [].obs; //result after predict
-  CameraController? cameraController; //controller for camera
-  File? image; //for captured image
-  RxString path = "".obs; //
+  //RxList output = [].obs; //result after predict
+  Rx<File> image = File("").obs; //for captured image
+  RxString path = "".obs;
+  RxString label = "".obs;
+  RxBool isWaiting = true.obs;
+  RxBool isProcess = false.obs;
 
   late List<CameraDescription> _cameras;
   late CameraController _cameraController;
   final RxBool _isInitialized = RxBool(false);
+  bool get isInitialized => _isInitialized.value;
+  CameraController get cameraController => _cameraController;
 
   @override
   void onInit() {
@@ -22,7 +27,8 @@ class AppController extends GetxController {
 
   Future<void> initCamera() async {
     _cameras = await availableCameras();
-    _cameraController = CameraController(_cameras[1], ResolutionPreset.high);
+    _cameraController = CameraController(_cameras[0], ResolutionPreset.high);
+    _cameraController.setFlashMode(FlashMode.off);
     _cameraController.initialize().then((value) {
       _isInitialized.value = true;
       _isInitialized.refresh();
@@ -43,30 +49,38 @@ class AppController extends GetxController {
   //detect type of trash
   void detectImage() async {
     var result = await Tflite.runModelOnImage(
-      path: image!.path,
+      path: image.value.path,
       numResults: 2,
       threshold: 0.6,
       imageMean: 127.5,
       imageStd: 127.5,
     );
-    output.value = result!;
+
+    label.value = result![0]["label"].split(" ")[1];
+    isProcess.value = false;
+    print("${data["${label.value}"]}");
+  }
+
+  void reset() {
+    isWaiting.value = true;
+    isProcess.value = false;
+    image.value = File("");
+    label.value = "";
   }
 
   //capture image
   void captureImage() async {
     try {
-      if (cameraController != null) {
-        //check if contrller is not null
-        if (cameraController!.value.isInitialized) {
-          print("capture image");
+      if (cameraController.value.isInitialized) {
+        isWaiting.value = false;
+        isProcess.value = true;
+        print("capture image");
 
-          XFile recordImage =
-              await cameraController!.takePicture(); //capture image
-          print("path of image after take is " + recordImage.path);
-          image = File(recordImage.path);
-          path.value = recordImage.path;
-          detectImage();
-        }
+        XFile recordImage =
+            await cameraController.takePicture(); //capture image
+        print("path of image after take is ${recordImage.path}");
+        image.value = File(recordImage.path);
+        detectImage();
       }
     } catch (e) {
       print(e); //show error
