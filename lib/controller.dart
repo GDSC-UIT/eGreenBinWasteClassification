@@ -1,74 +1,86 @@
+import 'package:esp_app/data/data.dart';
 import 'package:get/get.dart';
 import 'package:camera/camera.dart';
 import 'dart:io';
 import 'package:tflite/tflite.dart';
 
 class AppController extends GetxController {
-  //RxString output = "".obs;
-  RxList output = [].obs; //result after predict
-  CameraController? cameraController; //controller for camera
-  File? image; //for captured image
-  RxString path = "".obs; //
-  List<CameraDescription>? cameras;
+  //RxList output = [].obs; //result after predict
+  Rx<File> image = File("").obs; //for captured image
+  RxString path = "".obs;
+  RxString label = "".obs;
+  RxBool isWaiting = true.obs;
+  RxBool isProcess = false.obs;
+
+  late List<CameraDescription> _cameras;
+  late CameraController _cameraController;
+  final RxBool _isInitialized = RxBool(false);
+  bool get isInitialized => _isInitialized.value;
+  CameraController get cameraController => _cameraController;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    //loadCamera();
+    initCamera();
   }
 
-  // void loadCamera() async {
-  //   try {
-  //     cameras = await availableCameras();
-  //     if (cameras != null) {
-  //       cameraController = CameraController(cameras![1], ResolutionPreset.max);
-  //       print("camera load success");
-  //       //cameras[0] = first camera, change to 1 to another camera
-  //       //print("controller is null ${cameraController == null}");
-  //       //cameraController!.setFlashMode(FlashMode.off);
-
-  //       // cameraController!.initialize().then((_) {
-  //       //   if (!mounted) {
-  //       //     return;
-  //       //   }
-  //       //   setState(() {});
-  //       // });
-  //     } else {
-  //       print("NO any camera found");
-  //     }
-  //   } catch (e) {
-  //     print("error occurred: $e");
-  //   }
-  // }
+  Future<void> initCamera() async {
+    _cameras = await availableCameras();
+    _cameraController = CameraController(_cameras[0], ResolutionPreset.high);
+    _cameraController.setFlashMode(FlashMode.off);
+    _cameraController.initialize().then((value) {
+      _isInitialized.value = true;
+      _isInitialized.refresh();
+    }).catchError((Object e) {
+      if (e is CameraException) {
+        switch (e.code) {
+          case 'CameraAccessDenied':
+            print('User denied camera access.');
+            break;
+          default:
+            print('Handle other errors.');
+            break;
+        }
+      }
+    });
+  }
 
   //detect type of trash
   void detectImage() async {
     var result = await Tflite.runModelOnImage(
-      path: image!.path,
+      path: image.value.path,
       numResults: 2,
       threshold: 0.6,
       imageMean: 127.5,
       imageStd: 127.5,
     );
-    output.value = result!;
+
+    label.value = result![0]["label"].split(" ")[1];
+    isProcess.value = false;
+    print("${data["${label.value}"]}");
+  }
+
+  void reset() {
+    isWaiting.value = true;
+    isProcess.value = false;
+    image.value = File("");
+    label.value = "";
   }
 
   //capture image
   void captureImage() async {
     try {
-      if (cameraController != null) {
-        //check if contrller is not null
-        if (cameraController!.value.isInitialized) {
-          print("capture image");
+      if (cameraController.value.isInitialized) {
+        isWaiting.value = false;
+        isProcess.value = true;
+        print("capture image");
 
-          XFile recordImage =
-              await cameraController!.takePicture(); //capture image
-          print("path of image after take is " + recordImage.path);
-          image = File(recordImage.path);
-          path.value = recordImage.path;
-          detectImage();
-        }
+        XFile recordImage =
+            await cameraController.takePicture(); //capture image
+        print("path of image after take is ${recordImage.path}");
+        image.value = File(recordImage.path);
+        detectImage();
       }
     } catch (e) {
       print(e); //show error
