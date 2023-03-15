@@ -17,10 +17,15 @@ class CameraView extends StatelessWidget {
         height: 250,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          image: const DecorationImage(
-            image: AssetImage("assets/images/bg_camera.png"),
-            fit: BoxFit.cover,
-          ),
+          image: controller.isWaiting.value
+              ? const DecorationImage(
+                  image: AssetImage("assets/images/bg_waiting.png"),
+                  fit: BoxFit.cover,
+                )
+              : const DecorationImage(
+                  image: AssetImage("assets/images/bg_done.png"),
+                  fit: BoxFit.cover,
+                ),
           borderRadius: BorderRadius.circular(20.0),
           boxShadow: [
             BoxShadow(
@@ -31,40 +36,58 @@ class CameraView extends StatelessWidget {
             ),
           ],
         ),
-        child: Container(
-          child: Column(
-            children: [
-              Expanded(
-                child: controller.image.value.path == ""
-                    ? CameraPreview(
-                        controller.cameraController,
-                        child: Stack(children: const [
-                          Positioned(
-                              bottom: 0,
-                              right: 15,
-                              child: Circle(color: Color(0xFF99BF6F))),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Circle(
-                              color: Color(0xFFFFAC63),
-                            ),
-                          ),
-                        ]),
-                      )
-                    : Image.file(
-                        controller.image.value,
-                        fit: BoxFit.cover,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            controller.image.value.path == ""
+                ? AspectRatio(
+                    aspectRatio: 1,
+                    child: ClipRect(
+                      child: Transform.scale(
+                        scale: controller.cameraController.value.aspectRatio,
+                        child: Center(
+                          child: CameraPreview(controller.cameraController),
+                        ),
                       ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-            ],
-          ),
+                    ),
+                  )
+                : Image.file(
+                    controller.image.value,
+                    fit: BoxFit.cover,
+                  ),
+            const Positioned(
+              child: TwoCircle(),
+            )
+          ],
         ),
       );
     });
+  }
+}
+
+class TwoCircle extends StatelessWidget {
+  const TwoCircle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(children: const [
+      Positioned(
+        bottom: 0,
+        right: 15,
+        child: Circle(
+          color: Color(0xFF99BF6F),
+        ),
+      ),
+      Positioned(
+        bottom: 0,
+        right: 0,
+        child: Circle(
+          color: Color(0xFFFFAC63),
+        ),
+      ),
+    ]);
   }
 }
 

@@ -80,29 +80,40 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 32,
                   ),
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Content(),
-                          TextButton(
-                            onPressed: () {
-                              controller.captureImage();
-                            },
-                            child: Text("captured"),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Content(),
+                                TextButton(
+                                  onPressed: () {
+                                    controller.captureImage();
+                                  },
+                                  child: Text("captured"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    controller.reset();
+                                  },
+                                  child: Text("reset"),
+                                ),
+                              ],
+                            ),
                           ),
-                          TextButton(
-                            onPressed: () {
-                              controller.reset();
-                            },
-                            child: Text("reset"),
-                          ),
-                          Align(
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Align(
                             alignment: Alignment.bottomRight,
                             child: Image.asset("assets/images/logo.png"),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

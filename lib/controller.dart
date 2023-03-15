@@ -48,6 +48,7 @@ class AppController extends GetxController {
 
   //detect type of trash
   void detectImage() async {
+    print("start detection");
     var result = await Tflite.runModelOnImage(
       path: image.value.path,
       numResults: 2,
@@ -55,10 +56,13 @@ class AppController extends GetxController {
       imageMean: 127.5,
       imageStd: 127.5,
     );
+    print("complete detection ${result![0]}");
+    print("complete detection ${result[0]["label"]}");
 
-    label.value = result![0]["label"].split(" ")[1];
+    label.value = result[0]["label"];
+
+    print("label value:${label.value}");
     isProcess.value = false;
-    print("${data["${label.value}"]}");
   }
 
   void reset() {
