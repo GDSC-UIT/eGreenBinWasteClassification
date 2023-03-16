@@ -1,28 +1,54 @@
-import 'package:esp_app/data/data.dart';
+import 'package:web_socket_channel/io.dart';
 import 'package:get/get.dart';
 import 'package:camera/camera.dart';
 import 'dart:io';
 import 'package:tflite/tflite.dart';
 
+const String esp_url = "ws://192.168.1.71:81";
+
 class AppController extends GetxController {
-  //RxList output = [].obs; //result after predict
   Rx<File> image = File("").obs; //for captured image
-  RxString path = "".obs;
   RxString label = "".obs;
   RxBool isWaiting = true.obs;
   RxBool isProcess = false.obs;
-
   late List<CameraDescription> _cameras;
   late CameraController _cameraController;
   final RxBool _isInitialized = RxBool(false);
   bool get isInitialized => _isInitialized.value;
   CameraController get cameraController => _cameraController;
+  final channel = IOWebSocketChannel.connect(esp_url);
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     initCamera();
+    initEsp();
+  }
+
+  void initEsp() {
+    channel.stream.listen(
+      (message) {
+        print('Received from MCU: $message');
+        String signal = message;
+        switch (signal) {
+          case "capture":
+            {
+              captureImage();
+              break;
+            }
+          default:
+            print(' invalid entry');
+        }
+      },
+      onDone: () {
+        //if WebSocket is disconnected
+        print("Web socket is closed");
+      },
+      onError: (error) {
+        print(error.toString());
+      },
+    );
   }
 
   Future<void> initCamera() async {
@@ -47,7 +73,7 @@ class AppController extends GetxController {
   }
 
   //detect type of trash
-  void detectImage() async {
+  Future<void> detectImage() async {
     print("start detection");
     var result = await Tflite.runModelOnImage(
       path: image.value.path,
@@ -56,11 +82,7 @@ class AppController extends GetxController {
       imageMean: 127.5,
       imageStd: 127.5,
     );
-    print("complete detection ${result![0]}");
-    print("complete detection ${result[0]["label"]}");
-
-    label.value = result[0]["label"];
-
+    label.value = result![0]["label"];
     print("label value:${label.value}");
     isProcess.value = false;
   }
@@ -76,15 +98,15 @@ class AppController extends GetxController {
   void captureImage() async {
     try {
       if (cameraController.value.isInitialized) {
+        print("capture image");
         isWaiting.value = false;
         isProcess.value = true;
-        print("capture image");
-
         XFile recordImage =
             await cameraController.takePicture(); //capture image
         print("path of image after take is ${recordImage.path}");
         image.value = File(recordImage.path);
-        detectImage();
+        await detectImage();
+        channel.sink.add(label.value);
       }
     } catch (e) {
       print(e); //show error
