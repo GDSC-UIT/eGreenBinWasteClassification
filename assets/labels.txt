@@ -1,5 +1,6 @@
 cardboard
 glass
 metal
-papper
+paper
 plastic
+plastic-bags
