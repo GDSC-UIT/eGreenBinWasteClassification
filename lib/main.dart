@@ -6,9 +6,11 @@ import 'package:flutter/services.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
-  // SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
-  //     .then((_) {});
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
+      .then((_) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +24,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ConnectPage(),
+      home: MyHomePage(
+        title: 'homepage',
+      ),
     );
   }
 }

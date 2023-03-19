@@ -1,52 +1,53 @@
 Map<String, Map> data = {
-  "cardboard": {
+  "paper": {
     "title": "papper",
-    "derived": "wood, rags, grasses, vegatable sources in water.",
+    "derived": "wood, rags, grasses, vegatable sources in water",
     "recycle": [
-      "Mulch or compost",
-      "Packing material",
-      "Wapping paper",
-      "Shelf liner or organiser",
-    ]
-  },
-  "glass": {
-    "title": "papper",
-    "derived": "wood, rags, grasses, vegatable sources in water.",
-    "recycle": [
-      "Mulch or compost",
-      "Packing material",
-      "Wapping paper",
-      "Shelf liner or organiser",
+      "Recycling into new paper products",
+      "Composting along with other organic materials",
+      "Burning to generate energy",
     ]
   },
   "metal": {
-    "title": "papper",
-    "derived": "wood, rags, grasses, vegatable sources in water.",
+    "title": "metal",
+    "derived": "aluminum, which is a lightweight and versatile metal.",
     "recycle": [
-      "Mulch or compost",
-      "Packing material",
-      "Wapping paper",
-      "Shelf liner or organiser",
+      "Making new aluminum products (new cans, bicycles, car parts, and building materials)",
+      "Turning into storage containers, decorative items, or even musical instruments",
     ]
   },
-  "papper": {
-    "title": "papper",
-    "derived": "wood, rags, grasses, vegatable sources in water.",
+  "glass": {
+    "title": "glass",
+    "derived": "silica sand, soda ash and limestone.",
     "recycle": [
-      "Mulch or compost",
-      "Packing material",
-      "Wapping paper",
-      "Shelf liner or organiser",
+      "Derived from: silica sand, soda ash and limestone.",
+      "Turning into fiberglass insulation, reflective coatings, and concrete",
     ]
   },
   "plastic": {
-    "title": "papper",
-    "derived": "wood, rags, grasses, vegatable sources in water.",
+    "title": "plastic",
+    "derived": "Derived from: silica sand, soda ash and limestone.",
     "recycle": [
-      "Mulch or compost",
-      "Packing material",
-      "Wapping paper",
-      "Shelf liner or organiser",
+      "Upcycling them into other objects, such as plant pots or bird feeders.",
+      "Upcycling them into other objects, such as plant pots or bird feeders.",
     ]
   },
+  "cardboard": {
+    "title": "Cardboard",
+    "derived": "wood, rags, grasses, vegatable sources in water",
+    "recycle": [
+      "Recycling into new paper products",
+      "Composting along with other organic materials",
+      "Burning to generate energy",
+    ],
+  },
+  "plastic-bags": {
+    "title": "Plastic bags",
+    "derived": "polymer known as polyethylene.",
+    "recycle": [
+      "Causing problems at the Material Recycling Facility (MRF)",
+      "Wrapping around the sorting equipment and shut them down ",
+      "Passing through the sorting process and often wind up in the paper bales",
+    ]
+  }
 };

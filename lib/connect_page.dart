@@ -90,7 +90,7 @@ class ConnectPage extends GetView<AppController> {
                               AppButton(
                                 onPressed: () {
                                   try {
-                                    //controller.connectEsp(textController.text);
+                                    controller.connectEsp(textController.text);
                                     Get.off(MyHomePage(title: "homepage"));
                                   } on FormatException catch (_, e) {
                                     Get.snackbar(
