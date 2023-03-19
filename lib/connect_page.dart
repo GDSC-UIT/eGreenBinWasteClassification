@@ -1,4 +1,5 @@
 import 'package:esp_app/controller.dart';
+import 'package:esp_app/home_page.dart';
 import 'package:esp_app/util/colors_assets.dart';
 import 'package:esp_app/util/image_assets.dart';
 import 'package:esp_app/widgets/app_button.dart';
@@ -89,8 +90,8 @@ class ConnectPage extends GetView<AppController> {
                               AppButton(
                                 onPressed: () {
                                   try {
-                                    controller.connectEsp(textController.text);
-                                    Get.off(WaitingPage());
+                                    //controller.connectEsp(textController.text);
+                                    Get.off(MyHomePage(title: "homepage"));
                                   } on FormatException catch (_, e) {
                                     Get.snackbar(
                                       "cannot connect try again",
