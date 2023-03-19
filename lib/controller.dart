@@ -17,13 +17,13 @@ class AppController extends GetxController {
   bool get isInitialized => _isInitialized.value;
   CameraController get cameraController => _cameraController;
   final channel = IOWebSocketChannel.connect(esp_url);
+  String espUrl = "";
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     initCamera();
-    initEsp();
   }
 
   void initEsp() {
@@ -50,6 +50,47 @@ class AppController extends GetxController {
       },
     );
   }
+
+  // void connectEsp(String espUrlInput) {
+  //   try {
+  //     espUrl = "ws://$espUrlInput:81";
+
+  //     print("url:$espUrl");
+
+  //     final channel = IOWebSocketChannel.connect(espUrl);
+  //     print("channel:$channel");
+  //     channel.stream.listen(
+  //       (message) {
+  //         print('Received from MCU: $message');
+  //         String signal = message;
+  //         if (signal == "0") {
+  //           return;
+  //         }
+  //         switch (signal) {
+  //           case "capture":
+  //             {
+  //               isTakeImage = true;
+  //               break;
+  //             }
+  //           default:
+  //             //catch trash label
+  //             log("here");
+  //             trashLabel.value = signal;
+  //         }
+  //       },
+  //       onDone: () {
+  //         //if WebSocket is disconnected
+  //         print("Web socket is closed");
+  //       },
+  //       onError: (error) {
+  //         print(error.toString());
+  //         throw const FormatException("Input not correct");
+  //       },
+  //     );
+  //   } catch (e) {
+  //     print("$e");
+  //   }
+  // }
 
   Future<void> initCamera() async {
     _cameras = await availableCameras();

@@ -1,3 +1,4 @@
+import 'package:esp_app/connect_page.dart';
 import 'package:esp_app/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,10 +6,9 @@ import 'package:flutter/services.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
-      .then((_) {
-    runApp(const MyApp());
-  });
+  runApp(const MyApp());
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
+  //     .then((_) {});
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'HomePage'),
+      home: ConnectPage(),
     );
   }
 }
