@@ -1,16 +1,5 @@
 # esp_app
 
-A new Flutter project.
+App Detect Type of trash
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img title="a title" alt="Alt text" src="https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.15752-9/331147094_944403543591820_4912738740637716862_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=Oy5l0aJGi1MAX9p_Ulx&_nc_ht=scontent.fsgn2-5.fna&oh=03_AdQAEgrKfH6oO9C8ZjnhYnu4CNk_KOqoFix0FdADbtCr1A&oe=643E8E79">
