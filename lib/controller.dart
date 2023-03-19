@@ -16,7 +16,7 @@ class AppController extends GetxController {
   final RxBool _isInitialized = RxBool(false);
   bool get isInitialized => _isInitialized.value;
   CameraController get cameraController => _cameraController;
-  final channel = IOWebSocketChannel.connect(esp_url);
+  late final IOWebSocketChannel channel;
   String espUrl = "";
 
   @override
@@ -24,6 +24,7 @@ class AppController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     initCamera();
+    connectEsp("192.168.1.13");
   }
 
   void connectEsp(String espUrlInput) {
@@ -32,7 +33,7 @@ class AppController extends GetxController {
 
       print("url:$espUrl");
 
-      final channel = IOWebSocketChannel.connect(espUrl);
+      channel = IOWebSocketChannel.connect(espUrl);
       print("channel:$channel");
       channel.stream.listen(
         (message) {
@@ -120,6 +121,7 @@ class AppController extends GetxController {
         print("path of image after take is ${recordImage.path}");
         image.value = File(recordImage.path);
         await detectImage();
+        print("labal trash ${label.value}");
         channel.sink.add(label.value);
       }
     } catch (e) {
