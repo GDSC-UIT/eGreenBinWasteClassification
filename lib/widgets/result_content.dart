@@ -1,3 +1,4 @@
+import 'package:esp_app/data/data.dart';
 import 'package:flutter/cupertino.dart';
 
 class ResultContent extends StatelessWidget {
@@ -6,13 +7,6 @@ class ResultContent extends StatelessWidget {
     super.key,
     required this.label,
   });
-
-  var data = [
-    "Mulch or compost",
-    "Packing material",
-    "Wapping paper",
-    "Shelf liner or organiser",
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +25,17 @@ class ResultContent extends StatelessWidget {
           height: 8,
         ),
         RichText(
-          text: const TextSpan(
+          text: TextSpan(
               text: "Derived from: ",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 color: Color(0xFF000000),
                 fontWeight: FontWeight.bold,
               ),
               children: [
                 TextSpan(
-                  text: "wood, rags, grasses, vegatable sources in water.",
-                  style: TextStyle(
+                  text: data[label]!["derived"],
+                  style: const TextStyle(
                     color: Color.fromARGB(255, 40, 40, 40),
                     fontWeight: FontWeight.normal,
                     fontSize: 18,
@@ -76,7 +70,7 @@ class ResultContent extends StatelessWidget {
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: data.map((item) {
+          children: data[label]!["recycle"].map<Widget>((item) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 4),
               child: Text("- $item"),

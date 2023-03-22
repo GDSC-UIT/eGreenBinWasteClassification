@@ -1,6 +1,6 @@
 Map<String, Map> data = {
   "paper": {
-    "title": "papper",
+    "title": "paper",
     "derived": "wood, rags, grasses, vegatable sources in water",
     "recycle": [
       "Recycling into new paper products",
@@ -20,16 +20,17 @@ Map<String, Map> data = {
     "title": "glass",
     "derived": "silica sand, soda ash and limestone.",
     "recycle": [
-      "Derived from: silica sand, soda ash and limestone.",
-      "Turning into fiberglass insulation, reflective coatings, and concrete",
+      "Turning into new bottles and jars.",
+      "Turning into fiberglass insulation, reflective coatings, and concrete.",
     ]
   },
   "plastic": {
     "title": "plastic",
-    "derived": "Derived from: silica sand, soda ash and limestone.",
+    "derived":
+        "polypropylene, this type of plastic is durable and shatter-resistant.",
     "recycle": [
       "Upcycling them into other objects, such as plant pots or bird feeders.",
-      "Upcycling them into other objects, such as plant pots or bird feeders.",
+      "Recycling into plastic lumber, carpet fibers, or even new plastic cups",
     ]
   },
   "cardboard": {
