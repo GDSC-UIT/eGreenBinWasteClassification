@@ -4,8 +4,6 @@ import 'package:camera/camera.dart';
 import 'dart:io';
 import 'package:tflite/tflite.dart';
 
-const String esp_url = "ws://192.168.1.71:81";
-
 class AppController extends GetxController {
   Rx<File> image = File("").obs; //for captured image
   RxString label = "".obs;
@@ -16,7 +14,9 @@ class AppController extends GetxController {
   final RxBool _isInitialized = RxBool(false);
   bool get isInitialized => _isInitialized.value;
   CameraController get cameraController => _cameraController;
-  late final IOWebSocketChannel channel;
+
+  late IOWebSocketChannel channel;
+
   String espUrl = "";
 
   @override
@@ -30,18 +30,12 @@ class AppController extends GetxController {
   void connectEsp(String espUrlInput) {
     try {
       espUrl = "ws://$espUrlInput:81";
-
       print("url:$espUrl");
-
       channel = IOWebSocketChannel.connect(espUrl);
-      print("channel:$channel");
       channel.stream.listen(
         (message) {
           print('Received from MCU: $message');
           String signal = message;
-          if (signal == "0") {
-            return;
-          }
           switch (signal) {
             case "capture":
               {
@@ -58,11 +52,10 @@ class AppController extends GetxController {
         },
         onError: (error) {
           print(error.toString());
-          throw const FormatException("Input not correct");
         },
       );
-    } catch (e) {
-      print("$e");
+    } on SocketException catch (socketException) {
+      print("Caught SocketException ff: $socketException");
     }
   }
 
