@@ -29,8 +29,8 @@ Map<String, Map> data = {
       "Shelf liner or organiser",
     ]
   },
-  "papper": {
-    "title": "papper",
+  "paper": {
+    "title": "paper",
     "derived": "wood, rags, grasses, vegatable sources in water.",
     "recycle": [
       "Mulch or compost",
@@ -40,7 +40,7 @@ Map<String, Map> data = {
     ]
   },
   "plastic": {
-    "title": "papper",
+    "title": "plastic",
     "derived": "wood, rags, grasses, vegatable sources in water.",
     "recycle": [
       "Mulch or compost",
