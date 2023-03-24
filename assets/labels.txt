@@ -1,5 +1,5 @@
 cardboard
 glass
 metal
-papper
+paper
 plastic
