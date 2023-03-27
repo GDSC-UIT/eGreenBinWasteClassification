@@ -90,6 +90,7 @@ class AppController extends GetxController {
       imageMean: 127.5,
       imageStd: 127.5,
     );
+    print("result: $result");
     label.value = result![0]["label"];
     print("label value:${label.value}");
     isProcess.value = false;
