@@ -1,5 +1,6 @@
 
 # eGreenBin Waste Classification
+<img align="right" width="300" alt="logo" src="assets/images_app/logo.png">
 
 This is a simple Flutter project that classifies trash items as either recycled or non-recycled, and provides basic information about each item.
 
@@ -37,9 +38,10 @@ The app uses the following dependencies:
 
 ## Screenshots
 
-![Screenshot 2023-03-29 191914.png](assets/images_app/trash_complete_2.png)
+<img align="right" alt="logo" src="assets/images_app/assets/images_app/trash_complete_2.png">
+<img align="right" width="300" alt="logo" src="assets/images_app/logo.png">
+<img align="right" alt="logo" src="assets/images_app/assets/images_app/trash_complete.png">
 
-![Screenshot 2023-03-29 191914.png](assets/images_app/trash_complete.png)
 ## Future improvements
 
 This is an app that can be expanded to include additional trash items and information when the AI model is updated with considerably massive data and high accuracy.
