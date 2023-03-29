@@ -43,3 +43,7 @@ The app uses the following dependencies:
 ## Future improvements
 
 This is an app that can be expanded to include additional trash items and information when the AI model is updated with considerably massive data and high accuracy.
+
+### Contributors
+
+- Nguyen Cong Tan Phat
