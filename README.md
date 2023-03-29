@@ -38,9 +38,11 @@ The app uses the following dependencies:
 
 ## Screenshots
 
-<img align="right" alt="logo" src="assets/images_app/assets/images_app/trash_complete_2.png">
-<img align="right" width="300" alt="logo" src="assets/images_app/logo.png">
-<img align="right" alt="logo" src="assets/images_app/assets/images_app/trash_complete.png">
+ <div align="center">
+    <img width="500"  alt="logo" src="assets/images_app/trash_complete_2.png">
+    <img width="500"  alt="logo" src="assets/images_app/trash_complete.png">
+ </div>
+
 
 ## Future improvements
 
