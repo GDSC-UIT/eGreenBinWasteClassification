@@ -94,6 +94,8 @@ class AppController extends GetxController {
     label.value = result![0]["label"];
     print("label value:${label.value}");
     isProcess.value = false;
+    await Future.delayed(const Duration(seconds: 3));
+    reset();
   }
 
   void reset() {

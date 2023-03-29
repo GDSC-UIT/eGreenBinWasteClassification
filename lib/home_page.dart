@@ -91,12 +91,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 const Content(),
                                 TextButton(
                                   onPressed: () {
-                                    controller.captureImage();
-                                  },
-                                  child: Text("captured"),
-                                ),
-                                TextButton(
-                                  onPressed: () {
                                     controller.reset();
                                   },
                                   child: Text("reset"),
