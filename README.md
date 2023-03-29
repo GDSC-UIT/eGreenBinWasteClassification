@@ -1,11 +1,46 @@
-# esp_app
+# eGreenBin markdown
 
-App Detect Type of trash
+# eGreenBin
 
-## How to use
-Install the Dart SDK: [Get the Dart SDK | Dart](https://dart.dev/get-dart)\
+This is a simple Flutter project that classifies trash items as either recycled or non-recycled, and provides basic information about each item.
 
-## Run program
-App near the trash can help identify the right type of garbage for students
+## Getting Started
 
-<img title="a title" alt="Alt text" src="https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.15752-9/331147094_944403543591820_4912738740637716862_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=Oy5l0aJGi1MAX9p_Ulx&_nc_ht=scontent.fsgn2-5.fna&oh=03_AdQAEgrKfH6oO9C8ZjnhYnu4CNk_KOqoFix0FdADbtCr1A&oe=643E8E79">
+To get started with this project, follow these steps:
+
+1. Clone the repository
+2. Open the project in your preferred IDE (e.g. Android Studio, VS Code)
+3. Run `flutter pub get` to install the required dependencies
+4. Run the project in an emulator or on a physical device
+
+## Using The App
+
+The app has a simple user interface that allows you to choose between two options - recycled or non-recycled. You can then choose a specific item from the list that you want more information on.
+
+## Project Structure
+
+The project consists of the following files and directories:
+
+- `android/` : The Android-specific project files
+- `ios/`: The iOS-specific project files
+- `lib/`: The Dart code for the app
+- `pubspec.yaml`: The pubspec file for the app
+
+## Dependencies
+
+The app uses the following dependencies:
+
+- `cupertino_icons:` ^1.0.2
+- `web_socket_channel:`^2.3.0
+- `get:`^4.6.5
+- `camera:`^0.10.3
+- `tflite:`^1.1.2
+
+## Screenshots
+
+![Screenshot 2023-03-29 191914.png](assets/images_app/trash_complete_2.png)
+
+![Screenshot 2023-03-29 191914.png](assets/images_app/trash_complete.png)
+## Future improvements
+
+This is an app that can be expanded to include additional trash items and information when the AI model is updated with considerably massive data and high accuracy.
