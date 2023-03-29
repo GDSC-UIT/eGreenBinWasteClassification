@@ -1,6 +1,5 @@
-# eGreenBin markdown
 
-# eGreenBin
+# eGreenBin Waste Classification
 
 This is a simple Flutter project that classifies trash items as either recycled or non-recycled, and provides basic information about each item.
 
