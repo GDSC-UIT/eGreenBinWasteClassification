@@ -39,6 +39,7 @@ The app uses the following dependencies:
 ## Screenshots
 
  <div align="center">
+    <img width="500"  alt="logo" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzZiNmRkZjkyYjNlNTkyODJlNDRjNjY2ZTk2OWRkZjRmYTkzOTY5MiZjdD1n/3PPV6myovCACi3cuv9/giphy.gif">
     <img width="500"  alt="logo" src="assets/images_app/trash_complete_2.png">
     <img width="500"  alt="logo" src="assets/images_app/trash_complete.png">
  </div>
