@@ -1,5 +1,5 @@
-import 'package:esp_app/util/colors_assets.dart';
-import 'package:esp_app/util/image_assets.dart';
+import 'package:egreenbin_waste_classification/util/colors_assets.dart';
+import 'package:egreenbin_waste_classification/util/image_assets.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {

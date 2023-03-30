@@ -1,5 +1,5 @@
-name: esp_app
-description: A new Flutter project.
+name: egreenbin_waste_classification
+description: A Flutter project aims to classify the type of waste and is a part of eGreenBin
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -40,6 +40,25 @@ dependencies:
   get: ^4.6.5
   camera: ^0.10.3
   tflite: ^1.1.2
+  flutter_launcher_icons: ^0.12.0
+  
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images_app/logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/images_app/logo.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/images_app/logo.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/images_app/logo.png"
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +86,7 @@ flutter:
   assets:
    - assets/
    - assets/images/
+   - assets/images_app/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,6 +1,6 @@
-import 'package:esp_app/widgets/process_content.dart';
-import 'package:esp_app/widgets/result_content.dart';
-import 'package:esp_app/widgets/waiting_content.dart';
+import 'package:egreenbin_waste_classification/widgets/process_content.dart';
+import 'package:egreenbin_waste_classification/widgets/result_content.dart';
+import 'package:egreenbin_waste_classification/widgets/waiting_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 

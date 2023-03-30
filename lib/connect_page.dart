@@ -1,9 +1,9 @@
-import 'package:esp_app/controller.dart';
-import 'package:esp_app/home_page.dart';
-import 'package:esp_app/util/colors_assets.dart';
-import 'package:esp_app/util/image_assets.dart';
-import 'package:esp_app/widgets/app_button.dart';
-import 'package:esp_app/widgets/header.dart';
+import 'package:egreenbin_waste_classification/controller.dart';
+import 'package:egreenbin_waste_classification/home_page.dart';
+import 'package:egreenbin_waste_classification/util/colors_assets.dart';
+import 'package:egreenbin_waste_classification/util/image_assets.dart';
+import 'package:egreenbin_waste_classification/widgets/app_button.dart';
+import 'package:egreenbin_waste_classification/widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

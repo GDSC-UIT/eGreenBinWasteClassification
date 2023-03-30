@@ -1,5 +1,5 @@
 import 'package:camera/camera.dart';
-import 'package:esp_app/controller.dart';
+import 'package:egreenbin_waste_classification/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

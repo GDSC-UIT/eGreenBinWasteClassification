@@ -1,4 +1,4 @@
-import 'package:esp_app/data/data.dart';
+import 'package:egreenbin_waste_classification/data/data.dart';
 import 'package:flutter/cupertino.dart';
 
 class ResultContent extends StatelessWidget {

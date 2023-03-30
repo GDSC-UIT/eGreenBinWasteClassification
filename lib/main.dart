@@ -1,4 +1,4 @@
-import 'package:esp_app/connect_page.dart';
+import 'package:egreenbin_waste_classification/connect_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

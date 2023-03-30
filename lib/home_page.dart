@@ -1,6 +1,6 @@
-import 'package:esp_app/widgets/camera_widget.dart';
-import 'package:esp_app/controller.dart';
-import 'package:esp_app/widgets/content_widget.dart';
+import 'package:egreenbin_waste_classification/widgets/camera_widget.dart';
+import 'package:egreenbin_waste_classification/controller.dart';
+import 'package:egreenbin_waste_classification/widgets/content_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tflite/tflite.dart';
