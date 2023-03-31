@@ -30,7 +30,7 @@ class AppController extends GetxController {
   void connectEsp(String espUrlInput) {
     try {
       espUrl = "ws://$espUrlInput:81";
-      print("url:$espUrl");
+
       channel = IOWebSocketChannel.connect(espUrl);
       channel.stream.listen(
         (message) {
@@ -90,7 +90,6 @@ class AppController extends GetxController {
       imageMean: 127.5,
       imageStd: 127.5,
     );
-    print("result: $result");
     label.value = result![0]["label"];
     print("label value:${label.value}");
     isProcess.value = false;

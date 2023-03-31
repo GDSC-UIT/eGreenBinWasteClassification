@@ -98,7 +98,6 @@ class ConnectPage extends StatelessWidget {
                                   Get.to(MyHomePage(title: "homePage"));
                                 });
                               } on FormatException catch (_, e) {
-                                print("here adfknfa");
                                 Get.snackbar(
                                   "cannot connect try again",
                                   "$e",
