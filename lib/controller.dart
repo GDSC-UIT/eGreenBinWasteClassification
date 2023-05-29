@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:camera/camera.dart';
 import 'dart:io';
 import 'package:tflite/tflite.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class AppController extends GetxController {
   Rx<File> image = File("").obs; //for captured image
@@ -83,18 +85,37 @@ class AppController extends GetxController {
   //detect type of trash
   Future<void> detectImage() async {
     print("start detection");
-    var result = await Tflite.runModelOnImage(
-      path: image.value.path,
-      numResults: 2,
-      threshold: 0.6,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
-    label.value = result![0]["label"];
+    label.value = await uploadImageToDetect(image.value);
     print("label value:${label.value}");
     isProcess.value = false;
-    await Future.delayed(const Duration(seconds: 3));
-    reset();
+    //await Future.delayed(const Duration(seconds: 3));
+    //reset();
+  }
+
+  Future<String> uploadImageToDetect(File imageFile) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://34.147.108.136/predict'));
+
+    // Thêm file ảnh vào yêu cầu đa phần
+    var imageStream = http.ByteStream(imageFile.openRead());
+    var length = await imageFile.length();
+    var multipartFile = http.MultipartFile('img_file', imageStream, length,
+        filename: imageFile.path);
+
+    request.files.add(multipartFile);
+
+    // Gửi yêu cầu và xử lý phản hồi
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      var responseString = await response.stream.bytesToString();
+      var jsonResponse = json.decode(responseString);
+      print('Upload thành công! Phản hồi: ${jsonResponse["label"]}');
+      return jsonResponse["label"];
+    } else {
+      print('Upload thất bại. Mã lỗi: ${response.statusCode}');
+      return throw Exception('Something went wrong while detecting');
+    }
   }
 
   void reset() {

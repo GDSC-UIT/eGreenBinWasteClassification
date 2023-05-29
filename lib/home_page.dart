@@ -95,6 +95,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                   },
                                   child: Text("reset"),
                                 ),
+                                TextButton(
+                                  onPressed: () {
+                                    controller.captureImage();
+                                  },
+                                  child: Text("capture"),
+                                ),
                               ],
                             ),
                           ),
