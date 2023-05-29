@@ -2,7 +2,6 @@ import 'package:web_socket_channel/io.dart';
 import 'package:get/get.dart';
 import 'package:camera/camera.dart';
 import 'dart:io';
-import 'package:tflite/tflite.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
