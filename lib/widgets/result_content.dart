@@ -14,7 +14,7 @@ class ResultContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
+          data[label]!["title"],
           style: const TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.w700,

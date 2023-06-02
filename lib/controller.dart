@@ -25,7 +25,6 @@ class AppController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     initCamera();
-    connectEsp("192.168.1.13");
   }
 
   void connectEsp(String espUrlInput) {
@@ -50,6 +49,10 @@ class AppController extends GetxController {
         onDone: () {
           //if WebSocket is disconnected
           print("Web socket is closed");
+          Get.snackbar(
+            'Error occurred while connecting IOT system',
+            'Try to reconnect',
+          );
         },
         onError: (error) {
           print(error.toString());
@@ -87,8 +90,6 @@ class AppController extends GetxController {
     label.value = await uploadImageToDetect(image.value);
     print("label value:${label.value}");
     isProcess.value = false;
-    //await Future.delayed(const Duration(seconds: 3));
-    //reset();
   }
 
   Future<String> uploadImageToDetect(File imageFile) async {
@@ -136,8 +137,10 @@ class AppController extends GetxController {
         print("path of image after take is ${recordImage.path}");
         image.value = File(recordImage.path);
         await detectImage();
-        print("labal trash ${label.value}");
+        print("labal trash: ${label.value}");
         channel.sink.add(label.value);
+        await Future.delayed(const Duration(seconds: 5));
+        reset();
       }
     } catch (e) {
       print(e); //show error
