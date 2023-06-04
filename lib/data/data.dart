@@ -42,7 +42,7 @@ Map<String, Map> data = {
       "Burning to generate energy",
     ],
   },
-  "plastic-bags": {
+  "plastic_bag": {
     "title": "Plastic bags",
     "derived": "polymer known as polyethylene.",
     "recycle": [
